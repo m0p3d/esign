@@ -7,10 +7,21 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/xy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preceq"/>
+    </LinearLayout>
+    <LinearLayout
         android:id="@+id/idDrawBallView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"></LinearLayout>
+        tools:layout_editor_absoluteY="8dp">
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

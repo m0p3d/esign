@@ -8,8 +8,11 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.idDrawBallView);
+        textView = (TextView) findViewById(R.id.xy);
 
         final DrawBallView drawBallView = new DrawBallView(this);
 
@@ -27,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
+                textView.setText("X: " + String.valueOf(motionEvent.getX()) + "; Y: " + String.valueOf(motionEvent.getY()));
                 drawBallView.setCurrX(motionEvent.getX());
                 drawBallView.setCurrY(motionEvent.getY());
 

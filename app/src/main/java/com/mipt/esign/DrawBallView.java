@@ -8,6 +8,8 @@ import android.view.View;
 
 public class DrawBallView extends View {
 
+    Paint paint;
+
     private float currX = 100;
 
     private float currY = 100;
@@ -41,13 +43,14 @@ public class DrawBallView extends View {
     // DrawBallView constructor.
     public DrawBallView(Context context) {
         super(context);
+
+        paint = new Paint();
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Paint paint = new Paint();
         paint.setColor(this.getBallColor());
         canvas.drawCircle(currX, currY, 35, paint);
     }
