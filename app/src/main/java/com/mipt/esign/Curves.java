@@ -15,7 +15,7 @@ class CurveMeta {
 class Curve {
 	public List<Vector2D> dots = new ArrayList<>();
 
-	public void Normalize() {
+	public void normalize() {
 		if (dots.size() > 0) {
 			double minX = dots.get(0).x();
 			double maxX = dots.get(0).x();
@@ -36,15 +36,61 @@ class Curve {
 				}
 			}
 			for (int i = 0; i < dots.size(); i++) {
-				dots.set(i, new Vector2D((dots.get(i).x() - minX) / (maxX - minX),
-						(dots.get(i).y() - minY) / (maxY - minY)));
+				double newX;
+				if (minX == maxX) {
+					newX = 0.0f;
+				} else {
+					newX = (dots.get(i).x() - minX) / (maxX - minX);
+				}
+				if (minY == maxY) {
+					newY = 0.0f;
+				} else {
+					newY = (dots.get(i).y() - minY) / (maxY - minY);
+				}
+
+				dots.set(i, new Vector2D(newX, newY));
 			}
 		}
 	}
 
-	//public ArrayList<Curve> slice() {
-		/* TODO: Finish it! */
-	//}
+	public final static double angleThreshold = 0.2f; 
+	/* If too much slices happen, try increasing angleThreshold 
+	 * TODO: try 0.3f, 0.4f */
+
+	
+//	public ArrayList<Curve> slice() {
+//		/* TODO: Finish it! */
+//		int sliceStart = 0;
+//		for(int i = 0; i < dots.size() - 2; i++) {
+//			Vector2D v = dots.get(i + 2).minus(dots.get(i + 1));
+//			double vAngle = dots.get(i + 2).minus(dots.get(i)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
+//
+//			if (vAngle > angleThreshold || vAngle < -angleThreshold) {
+//				/* The actual slicing. */
+//				sliceStart = 1 + 1;
+//			}
+
+
+
+//				double curvature;
+//				if( vLen == 0.0f ) {
+//					curvature = 0.0f;
+//				} else {
+//					curvature = (2.0f * Math.sin(vAngle)) / vLen;
+//				}
+				/* If angle is negative -> 
+				 * sin is negative -> 
+				 * curvature is negative
+//				 * PERFECT */ 
+//				if (curvature > maxCurvature) {
+//					maxCurvature = curvature;
+//				}
+//				if (curvature < minCurvature) {
+//					minCurvature = curvature;
+//				}
+//			}
+//
+//	}
 
 	public CurveMeta getMeta() {
 		CurveMeta meta = new CurveMeta();
