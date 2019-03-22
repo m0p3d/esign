@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.List;
+
+import math.geom2d.Vector2D;
+
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
@@ -32,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Curve curve = new Curve();
+                    List<float[]> coords = Single.instance.getCoords();
+                    for (int i = 0; i < coords.size(); i++) {
+                        curve.dots.add(new Vector2D(coords.get(i)[0], coords.get(i)[1]));
+                    }
+                    curve.normalize();
+                    CurveMeta meta = curve.getMeta();
                     Single.instance.flushCoords();
                 }
 

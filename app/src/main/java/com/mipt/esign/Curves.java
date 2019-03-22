@@ -60,7 +60,7 @@ class Curve {
 
 	/* TODO: Test slice(): draw dots of sliced curve 
 	 * with various colours. */
-	public ArrayList<Curve> slice() {
+	public List<Curve> slice() {
 		/* TODO: Finish it! */
 		int sliceStart = 0;
 		List<Curve> slices = new ArrayList<>();
@@ -71,15 +71,17 @@ class Curve {
 			if (angle > angleThreshold || angle < -angleThreshold) {
 				/* The actual slicing. */
 				Curve c = new Curve();
-				c.dots = dots.sublist(sliceStart, i);
+				c.dots = dots.subList(sliceStart, i);
 				slices.add(c);
 				i++;
 				sliceStart = i;
 			}
 		}
 		Curve finalC = new Curve();
-		finalC.dots = dots.sublist(sliceStart, dots.size() - 1);
+		finalC.dots = dots.subList(sliceStart, dots.size() - 1);
 		slices.add(finalC);
+
+		return slices;
 	}
 
 	public CurveMeta getMeta() {
