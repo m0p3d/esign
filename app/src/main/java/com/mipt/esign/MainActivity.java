@@ -31,7 +31,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    Single.instance.flushCoords();
+                }
+
                 textView.setText("X: " + String.valueOf(motionEvent.getX()) + "; Y: " + String.valueOf(motionEvent.getY()));
+                Single.instance.getCoords().add(new float[] {motionEvent.getX(), motionEvent.getY()});
+
                 drawBallView.setCurrX(motionEvent.getX());
                 drawBallView.setCurrY(motionEvent.getY());
 

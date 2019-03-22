@@ -1,7 +1,7 @@
 package com.mipt.esign;
 
-import math.geom2d.Vector2D
-import java.util.ArrayList
+import math.geom2d.Vector2D;
+import java.util.ArrayList;
 
 class CurveMeta {
 	public double angleStart;
@@ -34,19 +34,20 @@ class Curve {
 					maxY = v.y();
 				}
 			}
-			for (Vector2D v : dots) {
-				v.x() = (v.x() - minX) / (maxX - minX);
-				v.y() = (v.y() - minY) / (maxY - minY);
+			for (int i = 0; i < dots.size(); i++) {
+				dots.set(i, new Vector2D((dots.get(i).x() - minX) / (maxX - minX),
+						(dots.get(i).y() - minY) / (maxY - minY)));
 			}
 		}
 	}
 
-	public ArrayList<Curve> slice() {
+	//public ArrayList<Curve> slice() {
 		/* TODO: Finish it! */
-	}
+	//}
 
 	public CurveMeta getMeta() {
-		CurveMeta meta;
+		CurveMeta meta = new CurveMeta();
+
 		if (dots.size() >= 2) {
 			meta.angleStart = dots.get(1).minus(dots.get(0)).angle();
 			meta.angleStop = dots.get(dots.size() - 1).minus(dots.get(dots.size() - 2)).angle();
@@ -56,12 +57,12 @@ class Curve {
 			double minCurvature = 0.0f;
 			for(int i = 0; i < dots.size() - 2; i++) {
 				Vector2D v = dots.get(i + 2).minus(dots.get(i + 1));
-				v.angle() = 0.0f;
-				double vLen = v.x();
+
+				double vLen = Math.sqrt(v.x() * v.x() + v.y() * v.y());
 				double vAngle = dots.get(i + 2).minus(dots.get(i)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
 				double curvature;
 				if( vLen == 0.0f ) {
-					curvature = 0.0f
+					curvature = 0.0f;
 				} else {
 					curvature = (2.0f * Math.sin(vAngle)) / vLen;
 				}
