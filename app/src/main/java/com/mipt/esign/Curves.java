@@ -58,40 +58,29 @@ class Curve {
 	/* If too much slices happen, try increasing angleThreshold 
 	 * TODO: try 0.3f, 0.4f */
 
-	
-//	public ArrayList<Curve> slice() {
-//		/* TODO: Finish it! */
-//		int sliceStart = 0;
-//		for(int i = 0; i < dots.size() - 2; i++) {
-//			Vector2D v = dots.get(i + 2).minus(dots.get(i + 1));
-//			double vAngle = dots.get(i + 2).minus(dots.get(i)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
-//
-//			if (vAngle > angleThreshold || vAngle < -angleThreshold) {
-//				/* The actual slicing. */
-//				sliceStart = 1 + 1;
-//			}
+	/* TODO: Test slice(): draw dots of sliced curve 
+	 * with various colours. */
+	public ArrayList<Curve> slice() {
+		/* TODO: Finish it! */
+		int sliceStart = 0;
+		List<Curve> slices = new ArrayList<>();
+		for(int i = 0; i < dots.size() - 2; i++) {
+			Vector2D v = dots.get(i + 2).minus(dots.get(i + 1));
+			double angle = dots.get(i + 2).minus(dots.get(i + 1)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
 
-
-
-//				double curvature;
-//				if( vLen == 0.0f ) {
-//					curvature = 0.0f;
-//				} else {
-//					curvature = (2.0f * Math.sin(vAngle)) / vLen;
-//				}
-				/* If angle is negative -> 
-				 * sin is negative -> 
-				 * curvature is negative
-//				 * PERFECT */ 
-//				if (curvature > maxCurvature) {
-//					maxCurvature = curvature;
-//				}
-//				if (curvature < minCurvature) {
-//					minCurvature = curvature;
-//				}
-//			}
-//
-//	}
+			if (angle > angleThreshold || angle < -angleThreshold) {
+				/* The actual slicing. */
+				Curve c = new Curve();
+				c.dots = dots.sublist(sliceStart, i);
+				slices.add(c);
+				i++;
+				sliceStart = i;
+			}
+		}
+		Curve finalC = new Curve();
+		finalC.dots = dots.sublist(sliceStart, dots.size() - 1);
+		slices.add(finalC);
+	}
 
 	public CurveMeta getMeta() {
 		CurveMeta meta = new CurveMeta();
