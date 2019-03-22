@@ -8,13 +8,10 @@ import android.view.View;
 
 public class DrawBallView extends View {
 
-    // Record current ball horizontal ordinate.
     private float currX = 100;
 
-    // Record current ball vertical ordinate
     private float currY = 100;
 
-    // This is the ball color.
     private int ballColor = Color.GREEN;
 
     public int getBallColor() {
@@ -25,7 +22,6 @@ public class DrawBallView extends View {
         this.ballColor = ballColor;
     }
 
-    // getter and setter method for currX and currY.
     public float getCurrX() {
         return currX;
     }
@@ -51,13 +47,8 @@ public class DrawBallView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // Create a new Paint object.
         Paint paint = new Paint();
-
-        // Set paint color.
         paint.setColor(this.getBallColor());
-
-        // Draw a circle in the canvas.
         canvas.drawCircle(currX, currY, 35, paint);
     }
 }
