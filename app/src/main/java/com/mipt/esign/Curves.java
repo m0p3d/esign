@@ -2,6 +2,7 @@ package com.mipt.esign;
 
 import math.geom2d.Vector2D;
 import java.util.ArrayList;
+import java.util.List;
 
 class CurveMeta {
 	public double angleStart;
@@ -12,7 +13,7 @@ class CurveMeta {
 
 
 class Curve {
-	public ArrayList<Vector2D> dots;
+	public List<Vector2D> dots = new ArrayList<>();
 
 	public void Normalize() {
 		if (dots.size() > 0) {
