@@ -37,6 +37,7 @@ class Curve {
 			}
 			for (int i = 0; i < dots.size(); i++) {
 				double newX;
+				double newY;
 				if (minX == maxX) {
 					newX = 0.0f;
 				} else {
