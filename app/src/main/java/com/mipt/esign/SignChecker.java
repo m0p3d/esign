@@ -27,12 +27,17 @@ class SignChecker {
 
 	public List<CurveMeta> pattern = new ArrayList<>();
 
-	
-	private List<CurveMeta> read(Curve sign) {
+
+	public List<Curve> dbgReadSlice(Curve sign) {
 		sign.normalize();
 		sign.smooth();
 		sign.smooth();
 		List<Curve> slices = sign.slice();
+		return slices;	
+	}
+	
+	private List<CurveMeta> read(Curve sign) {
+		List<Curve> slices = dbgReadSlice(sign);
 		List<CurveMeta> metas = new ArrayList<>();
 		for (Curve slice : slices) {
 			metas.add(slice.getMeta());
