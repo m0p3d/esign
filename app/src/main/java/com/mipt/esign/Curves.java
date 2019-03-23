@@ -5,16 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 class CurveMeta {
-	public double angleStart;
-	public double angleStop;
+//	public double angleStart;
+//	public double angleStop;
 	public double angleShift;
 	public double mainCurvature; // - concave, + convex
 
 	/* Constructor */
 	CurveMeta times(double k) {
 		CurveMeta res = new CurveMeta();
-		res.angleStart = angleStart * k;
-		res.angleStop = angleStop * k;
+//		res.angleStart = angleStart * k;
+//		res.angleStop = angleStop * k;
 		res.angleShift = angleShift * k;
 		res.mainCurvature = mainCurvature * k;
 		return res;
@@ -22,27 +22,27 @@ class CurveMeta {
 
 	CurveMeta plus(CurveMeta other) {
 		CurveMeta res = new CurveMeta();
-		res.angleStart = angleStart + other.angleStart;
-		res.angleStop = angleStop + other.angleStop;
+//		res.angleStart = angleStart + other.angleStart;
+//		res.angleStop = angleStop + other.angleStop;
 		res.angleShift = angleShift + other.angleShift;
 		res.mainCurvature = mainCurvature + other.mainCurvature;
 		return res;
 	}
 
 
-	public final static double astWeight = 1.0f;
-	public final static double aspWeight = 1.0f;
+//	public final static double astWeight = 1.0f;
+//	public final static double aspWeight = 1.0f;
 	public final static double ashWeight = 1.0f;
 	public final static double mcWeight = 0.02f;
 
 	double distance(CurveMeta other) {
-		double astDist = astWeight * (angleStart - other.angleStart);
-		double aspDist = aspWeight * (angleStop - other.angleStop);
+//		double astDist = astWeight * (angleStart - other.angleStart);
+//		double aspDist = aspWeight * (angleStop - other.angleStop);
 		double ashDist = ashWeight * (angleShift - other.angleShift);
 		double mcDist = mcWeight * (mainCurvature - other.mainCurvature);
 		return Math.sqrt(
-			astDist * astDist +
-			aspDist * aspDist +
+//			astDist * astDist +
+//			aspDist * aspDist +
 			ashDist * ashDist +
 			mcDist * mcDist);
 	}
@@ -141,8 +141,8 @@ class Curve {
 		CurveMeta meta = new CurveMeta();
 
 		if (dots.size() >= 2) {
-			meta.angleStart = dots.get(1).minus(dots.get(0)).angle();
-			meta.angleStop = dots.get(dots.size() - 1).minus(dots.get(dots.size() - 2)).angle();
+//			meta.angleStart = dots.get(1).minus(dots.get(0)).angle();
+//			meta.angleStop = dots.get(dots.size() - 1).minus(dots.get(dots.size() - 2)).angle();
 			meta.angleShift = dots.get(dots.size() - 1).minus(dots.get(0)).angle();
 
 			double maxCurvature = 0.0f;
