@@ -9,6 +9,23 @@ class CurveMeta {
 	public double angleStop;
 	public double angleShift;
 	public double mainCurvature; // - concave, + convex
+
+	public final static double astWeight = 1.0f;
+	public final static double aspWeight = 1.0f;
+	public final static double ashWeight = 1.0f;
+	public final static double mcWeight = 0.02f;
+
+	double distance(CurveMeta other) {
+		double astDist = astWeight * (angleStart - other.angleStart);
+		double aspDist = aspWeight * (angleStop - other.angleStop);
+		double ashDist = ashWeight * (angleShift - other.angleShift);
+		double mcDist = mcWeight * (mainCurvature - other.mainCurvature);
+		return Math.sqrt(
+			astDist * astDist +
+			aspDist * aspDist +
+			ashDist * ashDist +
+			mcDist * mcDist);
+	}
 };
 
 
@@ -58,17 +75,22 @@ class Curve {
 	/* If too much slices happen, try increasing angleThreshold 
 	 * TODO: try 0.3f, 0.4f */
 
+
+	public final static double curvatyAlphaThreshold = 0.2f;
+
+
 	/* TODO: Test slice(): draw dots of sliced curve 
 	 * with various colours. */
 	public List<Curve> slice() {
 		/* TODO: Finish it! */
 		int sliceStart = 0;
+		double minCurvaty;
+		double maxCurvaty;
 		List<Curve> slices = new ArrayList<>();
 		for(int i = 0; i < dots.size() - 2; i++) {
-			Vector2D v = dots.get(i + 2).minus(dots.get(i + 1));
+			/* Check dir mod */
 			double angle = dots.get(i + 2).minus(dots.get(i + 1)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
-
-			if (angle > angleThreshold || angle < -angleThreshold) {
+			if (angle > angleThreshold || angle < angleThreshold) { 
 				/* The actual slicing. */
 				Curve c = new Curve();
 				c.dots = dots.subList(sliceStart, i);
@@ -76,11 +98,13 @@ class Curve {
 				i++;
 				sliceStart = i;
 			}
+			/// + add curvaty check
 		}
-		Curve finalC = new Curve();
-		finalC.dots = dots.subList(sliceStart, dots.size() - 1);
-		slices.add(finalC);
-
+		if (dots.size() > 0) {
+			Curve finalC = new Curve();
+			finalC.dots = dots.subList(sliceStart, dots.size() - 1);
+			slices.add(finalC);
+		}
 		return slices;
 	}
 
