@@ -32,6 +32,17 @@ class CurveMeta {
 class Curve {
 	public List<Vector2D> dots = new ArrayList<>();
 
+	
+	public void smooth() {
+		if (dots.size() > 1) {
+			List<Vector2D> smoothedDots = new ArrayList<>();
+			for (int i = 0; i < dots.size() - 1; i++) {
+				smoothedDots.add(dots.get(i).plus(dots.get(i + 1)).times(0.5f));
+			}
+			dots = smoothedDots;
+		}
+	}
+
 	public void normalize() {
 		if (dots.size() > 0) {
 			double minX = dots.get(0).x();
