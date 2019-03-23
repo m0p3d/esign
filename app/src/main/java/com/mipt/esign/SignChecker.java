@@ -105,6 +105,8 @@ class SignChecker {
 			if (found) {
 				/* Here is found a matching pair l1[i1] and l2[i2] */
 				commonPattern.add(l1.get(i1).times(w1).plus(l2.get(i2).times(1.0f - w1)));
+				i1++;
+				i2++;
 			}
 		} while (found);
 		return commonPattern;
