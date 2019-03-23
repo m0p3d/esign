@@ -59,5 +59,19 @@ public class DrawBallView extends View {
             List<float[]> points = Single.instance.getCoords();
             canvas.drawCircle(points.get(i)[0], points.get(i)[1], 15, paint);
         }
+
+        List<Curve> slice = Single.instance.getSlice();
+        if (slice != null) {
+            for (int i = 0; i < slice.size(); i++) {
+                for (int j = 0; j < slice.get(i).dots.size(); j++) {
+                    if (i % 2 == 0) {
+                        paint.setColor(Color.GREEN);
+                    } else {
+                        paint.setColor(Color.BLUE);
+                    }
+                    canvas.drawCircle((float) slice.get(i).dots.get(j).x(), (float) slice.get(i).dots.get(j).y(), 15, paint);
+                }
+            }
+        }
     }
 }
