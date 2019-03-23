@@ -25,7 +25,7 @@ class SignChecker {
 	public final static int maxFaultsAllowedOnCreate = 2;
 	public final static int maxFaultsAllowed = 5;
 
-	public List<CurveMeta> pattern = ArrayList<>();
+	public List<CurveMeta> pattern = new ArrayList<>();
 
 	
 	private List<CurveMeta> read(Curve sign) {
@@ -77,7 +77,7 @@ class SignChecker {
 					break;
 				}
 
-				if (l1.get(i1 + s1).distance(l2.get(i2 + s2))) {
+				if (l1.get(i1 + s1).distance(l2.get(i2 + s2)) < epsilon) {
 					found = true;
 					i1 = i1 + s1;
 					i2 = i2 + s2;
@@ -102,6 +102,7 @@ class SignChecker {
 				commonPattern.add(l1.get(i1).times(w1).plus(l2.get(i2).times(1.0f - w1)));
 			}
 		} while (found);
+		return commonPattern;
 	}
 
 
