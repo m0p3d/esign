@@ -71,7 +71,7 @@ class Curve {
 		}
 	}
 
-	public final static double angleThreshold = 0.2f; 
+	public final static double angleThreshold = 0.5f; 
 	/* If too much slices happen, try increasing angleThreshold 
 	 * TODO: try 0.3f, 0.4f */
 
@@ -93,9 +93,9 @@ class Curve {
 			if (angle > angleThreshold || angle < angleThreshold) { 
 				/* The actual slicing. */
 				Curve c = new Curve();
-				c.dots = dots.subList(sliceStart, i);
+				c.dots = dots.subList(sliceStart, i + 1);
 				slices.add(c);
-				i++;
+				i += 2;
 				sliceStart = i;
 			}
 			/// + add curvaty check
