@@ -1,7 +1,7 @@
 package com.mipt.esign;
 
-import java.util.ArrayList
-import java.util.List
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * AABDC
@@ -77,7 +77,7 @@ class SignChecker {
 					break;
 				}
 
-				if (l1.get(i1 + s1).distance(l2.get(i2 + s2)) {
+				if (l1.get(i1 + s1).distance(l2.get(i2 + s2))) {
 					found = true;
 					i1 = i1 + s1;
 					i2 = i2 + s2;
@@ -107,7 +107,7 @@ class SignChecker {
 
 	/* Input - several similar curves - iterations of creating signature. */
 	public boolean create(List<Curve> signs) {
-		if (curves.size() > 0) {
+		if (signs.size() > 0) {
 			/* Idea: 
 			 * 1.Create pattern from the first sign;
 			 * 2.Check it with the next signes 
@@ -140,7 +140,7 @@ class SignChecker {
 		int j = 0;
 		for (CurveMeta meta : metas) {
 			if (j < pattern.size()) {
-				if (meta.distance(pattern.get(j) < epsilon)) {
+				if (meta.distance(pattern.get(j)) < epsilon) {
 					j++;
 				} else {
 					faults++;

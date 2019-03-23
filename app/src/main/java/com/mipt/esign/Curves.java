@@ -12,7 +12,7 @@ class CurveMeta {
 
 	/* Constructor */
 	CurveMeta times(double k) {
-		CurveMeta res;
+		CurveMeta res = new CurveMeta();
 		res.angleStart = angleStart * k;
 		res.angleStop = angleStop * k;
 		res.angleShift = angleShift * k;
@@ -21,7 +21,7 @@ class CurveMeta {
 	}
 
 	CurveMeta plus(CurveMeta other) {
-		CurveMeta res;
+		CurveMeta res = new CurveMeta();
 		res.angleStart = angleStart + other.angleStart;
 		res.angleStop = angleStop + other.angleStop;
 		res.angleShift = angleShift + other.angleShift;
