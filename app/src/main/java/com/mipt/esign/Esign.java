@@ -19,7 +19,7 @@ import java.util.List
  *
  */
 
-class ESign {
+class SignChecker {
 
 	public final static double epsilon = 2.0f;
 	public final static int maxFaultsAllowedOnCreate = 2;
