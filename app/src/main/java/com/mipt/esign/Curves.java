@@ -10,6 +10,26 @@ class CurveMeta {
 	public double angleShift;
 	public double mainCurvature; // - concave, + convex
 
+	/* Constructor */
+	CurveMeta times(double k) {
+		CurveMeta res;
+		res.angleStart = angleStart * k;
+		res.angleStop = angleStop * k;
+		res.angleShift = angleShift * k;
+		res.mainCurvature = mainCurvature * k;
+		return res;
+	}
+
+	CurveMeta plus(CurveMeta other) {
+		CurveMeta res;
+		res.angleStart = angleStart + other.angleStart;
+		res.angleStop = angleStop + other.angleStop;
+		res.angleShift = angleShift + other.angleShift;
+		res.mainCurvature = mainCurvature + other.mainCurvature;
+		return res;
+	}
+
+
 	public final static double astWeight = 1.0f;
 	public final static double aspWeight = 1.0f;
 	public final static double ashWeight = 1.0f;
@@ -33,7 +53,7 @@ class Curve {
 	public List<Vector2D> dots = new ArrayList<>();
 
 	
-	public void smooth(double k) {
+	public void smooth() {
 		if (dots.size() > 1) {
 			List<Vector2D> smoothedDots = new ArrayList<>();
 			for (int i = 0; i < dots.size() - 1; i++) {
@@ -133,7 +153,7 @@ class Curve {
 				double vLen = Math.sqrt(v.x() * v.x() + v.y() * v.y());
 				double vAngle = dots.get(i + 2).minus(dots.get(i)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
 				double curvature;
-				if( vLen == 0.0f ) {
+				if ( vLen == 0.0f ) {
 					curvature = 0.0f;
 				} else {
 					curvature = (2.0f * Math.sin(vAngle)) / vLen;
