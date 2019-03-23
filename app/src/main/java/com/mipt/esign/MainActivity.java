@@ -9,7 +9,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import math.geom2d.Vector2D;
@@ -17,6 +19,8 @@ import math.geom2d.Vector2D;
 public class MainActivity extends AppCompatActivity {
 
     TextView textView;
+    List<Curve> curves;
+    SignChecker checker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout rootLayout = (LinearLayout) findViewById(R.id.idDrawBallView);
         textView = (TextView) findViewById(R.id.xy);
 
+        curves = new ArrayList<>();
+        checker = new SignChecker();
+
         final DrawBallView drawBallView = new DrawBallView(this);
 
         drawBallView.setMinimumWidth(500);
@@ -34,15 +41,22 @@ public class MainActivity extends AppCompatActivity {
         View.OnTouchListener onTouchListener = new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
+                List<float[]> coords = Single.instance.getCoords();
 
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
-                    Curve curve = new Curve();
-                    List<float[]> coords = Single.instance.getCoords();
-                    for (int i = 0; i < coords.size(); i++) {
-                        curve.dots.add(new Vector2D(coords.get(i)[0], coords.get(i)[1]));
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    if (curves.size() < 2) {
+                        curves.add(new Curve());
                     }
-                    curve.normalize();
-                    CurveMeta meta = curve.getMeta();
+                    if (curves.size() == 2) {
+                        Toast.makeText(MainActivity.this, String.valueOf(checker.create(curves)),
+                                Toast.LENGTH_SHORT).show();
+                        curves = new ArrayList<>();
+                    }
+                    if (curves.size() > 0) {
+                        for (int i = 0; i < coords.size(); i++) {
+                            curves.get(curves.size() - 1).dots.add(new Vector2D(coords.get(i)[0], coords.get(i)[1]));
+                        }
+                    }
                     Single.instance.flushCoords();
                 }
 

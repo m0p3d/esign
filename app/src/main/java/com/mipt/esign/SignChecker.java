@@ -21,8 +21,8 @@ import java.util.List;
 
 class SignChecker {
 
-	public final static double epsilon = 2.0f;
-	public final static int maxFaultsAllowedOnCreate = 2;
+	public final static double epsilon = 10.0f;
+	public final static int maxFaultsAllowedOnCreate = 4;
 	public final static int maxFaultsAllowed = 5;
 
 	public List<CurveMeta> pattern = new ArrayList<>();
