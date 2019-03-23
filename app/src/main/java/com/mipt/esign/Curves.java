@@ -33,7 +33,7 @@ class Curve {
 	public List<Vector2D> dots = new ArrayList<>();
 
 	
-	public void smooth() {
+	public void smooth(double k) {
 		if (dots.size() > 1) {
 			List<Vector2D> smoothedDots = new ArrayList<>();
 			for (int i = 0; i < dots.size() - 1; i++) {
@@ -95,13 +95,11 @@ class Curve {
 	public List<Curve> slice() {
 		/* TODO: Finish it! */
 		int sliceStart = 0;
-		double minCurvaty;
-		double maxCurvaty;
 		List<Curve> slices = new ArrayList<>();
 		for(int i = 0; i < dots.size() - 2; i++) {
 			/* Check dir mod */
 			double angle = dots.get(i + 2).minus(dots.get(i + 1)).angle() - dots.get(i + 1).minus(dots.get(i)).angle();
-			if (angle > angleThreshold || angle < angleThreshold) { 
+			if (angle > angleThreshold || angle < -angleThreshold) { 
 				/* The actual slicing. */
 				Curve c = new Curve();
 				c.dots = dots.subList(sliceStart, i + 1);
