@@ -21,9 +21,9 @@ import java.util.List;
 
 class SignChecker {
 
-	public final static double epsilon = 10.0f;
-	public final static int maxFaultsAllowedOnCreate = 4;
-	public final static int maxFaultsAllowed = 5;
+	public final static double epsilon = 4.0f;
+	public final static int maxFaultsAllowedOnCreate = 2;
+	public final static int maxFaultsAllowed = 2;
 
 	public List<CurveMeta> pattern = new ArrayList<>();
 
@@ -32,8 +32,7 @@ class SignChecker {
 		sign.normalize();
 		sign.smooth();
 		sign.smooth();
-		List<Curve> slices = sign.slice();
-		return slices;	
+		return sign.slice();
 	}
 	
 	private List<CurveMeta> read(Curve sign) {
