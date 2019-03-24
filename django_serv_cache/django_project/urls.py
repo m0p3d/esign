@@ -20,5 +20,10 @@ from django.conf.urls import include, url
 from django_project import views
 
 urlpatterns = [
-    url(r'^$', views.auth, name='index')
+    url(r'^$', views.auth, name='index'),
+    url(r'^send$', views.send, name='send'),
+    url(r'^mytry$', views.mytry, name='mytry'),
+    url(r'^accepted$', views.accepted, name='accepted'),
+    url(r'^accepted_reg$', views.accepted_reg, name='accepted_reg'),
+    url(r'^check_acc$', views.check_acc, name='check_acc')
 ]

@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(MainActivity.this, "Начните регистрацию", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Начните регистрацию. У вас есть 10 секунд, чтобы вввести несложную подпись дважды", Toast.LENGTH_LONG).show();
                                 }
                             });
                         } else if (result.equals("log")) {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                             new Handler(Looper.getMainLooper()).post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(MainActivity.this, "Начните авторизацию", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Начните авторизацию. У вас есть 10 секунд, чтобы подтвердить свою подпись", Toast.LENGTH_LONG).show();
                                 }
                             });
                         }
@@ -168,6 +168,23 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.LENGTH_SHORT).show();
 
                         if (mode == 1 && same) {
+
+                            if (same) {
+                                Thread thread = new Thread() {
+                                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+                                    @Override
+                                    public void run() {
+                                        try {
+                                            String result = runApi("http://134.0.113.208/accepted_reg");
+
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                };
+                                thread.start();
+                            }
+
                             etalon = curves.get(0);
                             mode = 0;
                         }

@@ -22,7 +22,7 @@ import java.util.List;
 class SignChecker {
 
 	public final static double epsilon = 4.0f;
-	public final static int maxFaultsAllowedOnCreate = 2;
+	public final static int maxFaultsAllowedOnCreate = 1;
 	public final static int maxFaultsAllowed = 2;
 
 	public List<CurveMeta> pattern = new ArrayList<>();

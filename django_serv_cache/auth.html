@@ -1,0 +1,79 @@
+<html>
+<head><title>Авторизация</title>
+<style type="text/css">
+.center {
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+}
+
+.myButton {
+	background-color:transparent;
+	-moz-border-radius:28px;
+	-webkit-border-radius:28px;
+	border-radius:28px;
+	border:3px solid #34c740;
+	display:inline-block;
+	cursor:pointer;
+	color:#0ddb2c;
+	font-family:Arial;
+	font-size:20px;
+	padding:20px 45px;
+	text-decoration:none;
+	text-shadow:0px 1px 50px #2f6627;
+}
+.myButton:hover {
+	background-color:transparent;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.button_red{font:11px/21px Arial,Helvetica,sans-serif;font-weight:normal;width:100%;border-radius:2px;border:0;min-height:50px;height:auto;background:#e30611;margin-bottom:10px;white-space:pre;padding:10px 0; color:white; width:40%; margin-left:30%; font-size: 1.3em}
+.button_red:active{background:#b30517!important}
+.button_red:hover{background:#cc061a}
+
+.nb-input._nb-simple-input.nb-input_size_l:not(.is-disabled):focus,.nb-input._nb-simple-input.nb-input_size_m:not(.is-disabled):focus,.nb-input._nb-simple-input.nb-input_size_s:not(.is-disabled):focus,.nb-input._nb-simple-input:not(.is-disabled):hover{border-color:#e30611!important;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none}
+.nb-input._nb-simple-input.nb-input_size_l:not(.is-disabled):focus,.nb-input._nb-simple-input.nb-input_size_m:not(.is-disabled):focus,.nb-input._nb-simple-input.nb-input_size_s:not(.is-disabled):focus,.nb-input._nb-simple-input:not(.is-disabled):focus{border-color:#e30611!important;box-shadow:none;-webkit-box-shadow:none;-moz-box-shadow:none}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script type="">
+
+function loadDoc() {
+  var res = "";
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        res = this.responseText;
+        if (res != "ok") {
+            //loadDoc();
+        } else {
+        res = "";
+      }
+        alert(res); 
+    }
+  };
+  setTimeout(function () {
+       xhttp.open("GET", "check_acc", true);
+       xhttp.send();
+    }, 5000);
+}
+
+</script>
+</head>
+<body>
+
+<button id="reg" class="button_red" style="margin-top:250px" onclick="log.remove(); this.remove(); tel.style.visibility='visible'; send_reg.style.visibility='visible'; send_log.remove()">Регистрация</button><br>
+<button id="log" class="button_red" onclick="reg.remove(); this.remove(); tel.style.visibility='visible'; send_log.style.visibility='visible'; send_reg.remove();">Войти</button>
+
+<form action="send" method="post">
+{% csrf_token %}
+<input placeholder="Введите номер телефона" type="text" id="tel" name="tel" style="width:30%; height:50px; margin-left:35%; margin-top:250px; font-size:1.3em; text-align:center; visibility:hidden; height=250px;" />
+<button type="submit" id="send_reg" name="reg" class="button_red" style="margin-top:30px; visibility:hidden">Отправить</button>
+<button type="submit" id="send_log" name="log" onclick="loadDoc();" class="button_red" style="margin-top:30px; visibility:hidden">Отправить</button>
+</form>
+</body>
+</html>

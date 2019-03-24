@@ -1,0 +1,34 @@
+<html>
+<head>
+<script>
+
+function loadDoc() {
+  var res = "";
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        res = this.responseText;
+        if (res == "reg_ok") {
+            alert("Поздравляю! Вы зарегестрировались!");
+        } else if (res == "ok") {
+            alert("Поздравляю! Вы авторизованы!");
+      } else {
+            alert("Вы не авторизованы. Попробуйте еще раз");
+      }
+    }
+  };
+  setTimeout(function () {
+       xhttp.open("GET", "check_acc", true);
+       xhttp.send();
+    }, 10000);
+}
+window.onload = loadDoc();
+
+</script>
+<title>
+Priv
+</title>
+</head>
+<body>
+</body>
+</html>
